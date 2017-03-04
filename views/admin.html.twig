@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+{% set adminMenu = true %}
+
+{% block title %}Administration{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">{{ block('title') }}</h2>
+    {{ parent() }}
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a href="#articles" data-toggle="tab">Articles</a></li>
+                <li><a href="#comments" data-toggle="tab">Commentaires</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade in active adminTable" id="articles">
+            {% include "admin_article.html.twig" %}
+        </div>
+        <div class="tab-pane fade adminTable" id="comments">
+            {% include "admin_comment.html.twig" %}
+        </div>
+
+    </div>
+{% endblock %}

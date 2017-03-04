@@ -1,0 +1,24 @@
+{% if articles %}
+    <div class="table-responsive">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Signalé</th>
+                <th>Contenu</th>
+                <th></th>  <!-- Actions column -->
+            </tr>
+            </thead>
+            {% for comment in comments %}
+                <tr>
+                    <td>{%  if  comment.signal == 1 %} Oui {%  endif %}</td>
+                    <td>{{ comment.content | truncate(60) }}</td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-warning">Aucun commentaire trouvé.</div>
+{% endif %}
+<a href="{{ path('admin_article_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un article </button></a>
