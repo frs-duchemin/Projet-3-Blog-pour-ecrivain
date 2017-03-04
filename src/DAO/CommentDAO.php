@@ -104,6 +104,8 @@ class CommentDAO extends DAO
      * @param array $row The DB row containing Comment data.
      * @return \MicroCMS\Domain\Comment
      */
+
+    // TEST
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['com_id']);
