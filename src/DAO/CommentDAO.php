@@ -24,27 +24,23 @@ class CommentDAO extends DAO
      */
     public function find($id)
     {
-        $sql = "select * from t_article where art_id=?";
+        $sql = "select * from t_comment where com_id=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
 
         if ($row)
             return $this->buildDomainObject($row);
         else
-            throw new \Exception("No article matching id " . $id);
+            throw new \Exception("No comment matching id " . $id);
     }
 
     /**
      * Return a list of all comments for an article, sorted by date (most recent last).
      *
-     * @param integer $articleId The article id.
+     * @param integer commentId The article id.
      *
      * @return array A list of all comments for the article.
      */
     public function findAllByArticle($articleId) {
-        // The associated article is retrieved only once
-        $article = $this->articleDAO->find($articleId);
-
-
         $sql = "select com_id, com_content from t_comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
@@ -54,17 +50,13 @@ class CommentDAO extends DAO
             $comId = $row['com_id'];
             $comment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-            $comment->setArticle($article);
             $comments[$comId] = $comment;
         }
         return $comments;
     }
     public function findAllParentByArticle($articleId) {
-        // The associated article is retrieved only once
-        $article = $this->articleDAO->find($articleId);
+        $sql = "select * from t_comment where art_id=? and parent_id is NULL order by com_id";
 
-
-        $sql = "select com_id, com_content from t_comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -73,18 +65,13 @@ class CommentDAO extends DAO
             $comId = $row['com_id'];
             $comment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-            $comment->setArticle($article);
             $comments[$comId] = $comment;
         }
         return $comments;
     }
-    public function findAllChildren($articleId) {
-        // The associated article is retrieved only once
-        $article = $this->articleDAO->find($articleId);
-
-
-        $sql = "select com_id, com_content from t_comment where art_id=? order by com_id";
-        $result = $this->getDb()->fetchAll($sql, array($articleId));
+    public function findAllChildren($commentId) {
+        $sql = "select * from t_comment where parent_id=? order by com_id";
+        $result = $this->getDb()->fetchAll($sql, array($commentId));
 
         // Convert query result to an array of domain objects
         $comments = array();
@@ -92,24 +79,61 @@ class CommentDAO extends DAO
             $comId = $row['com_id'];
             $comment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-            $comment->setArticle($article);
+           // $comment->setArticle($article);
             $comments[$comId] = $comment;
         }
         return $comments;
     }
-
+    public function addSignal($comment)
+    {
+        $comment->setSignal(true);
+        $this->save($comment);
+    }
+    public function findAllBySignal()
+    {
+        
+    }
     /**
      * Creates an Comment object based on a DB row.
      *
      * @param array $row The DB row containing Comment data.
      * @return \MicroCMS\Domain\Comment
      */
+    /**
+     * Saves an comment into the database.
+     *
+     * @param \MicroCMS\Domain\Comment $comment The comment to save
+     */
+    public function save(Comment $comment) {
+        if ($comment->getParent()){
+            $parent = $comment->getParent()->getId();
+        } else {
+            $parent = null;
+        }
+        $commentData = array(
+            'com_content' => $comment->getContent(),
+            'art_id' => $comment->getArticle()->getId(),
+            'parent_id' => $parent,
+            'signale' => $comment->getSignal(),
+        );
 
-    // TEST
+        if ($comment->getId()) {
+            // The comment has already been saved : update it
+            $this->getDb()->update('t_comment', $commentData, array('com_id' => $comment->getId()));
+        } else {
+            // The comment has never been saved : insert it
+            $this->getDb()->insert('t_comment', $commentData);
+            // Get the id of the newly created comment and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $comment->setId($id);
+        }
+    }
+
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
+        $comment->setSignal($row['signale']);
 
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
@@ -117,7 +141,12 @@ class CommentDAO extends DAO
             $article = $this->articleDAO->find($articleId);
             $comment->setArticle($article);
         }
-
+        if (array_key_exists('parent_id', $row) && $row['parent_id']) {
+            // Find and set the associated article
+            $parentId = $row['parent_id'];
+            $parent = $this->find($parentId);
+            $comment->setParent($parent);
+        }
         return $comment;
     }
 }

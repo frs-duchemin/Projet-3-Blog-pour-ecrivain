@@ -127,7 +127,7 @@ $app->match('/article/{id}/comment/add/{parentId}', function($id, $parentId, Req
 $app->match('/comment/{id}/signal', function($id) use ($app) {
 
     $comment = $app['dao.comment']->find($id);
-    $app['dao.comment']->addSignal($id);
+    $app['dao.comment']->addSignal($comment);
     $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
 
     return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));

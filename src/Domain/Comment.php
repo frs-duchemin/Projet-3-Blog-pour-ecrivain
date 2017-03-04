@@ -21,6 +21,20 @@ class Comment
      * @var \MicroCMS\Domain\Article
      */
     private $article;
+
+    /**
+ * Associated parent.
+ *
+ * @var \MicroCMS\Domain\Comment
+ */
+    private $parent;
+
+    /**
+     *
+     * @var boolean
+     */
+    private $signal;
+
     public function getId() {
         return $this->id;
     }
@@ -41,6 +55,21 @@ class Comment
     }
     public function setArticle(Article $article) {
         $this->article = $article;
+        return $this;
+    }
+    public function getParent() {
+        return $this->parent;
+    }
+    public function setParent(Comment $parent) {
+        $this->parent = $parent;
+        return $this;
+    }
+
+    public function getSignal() {
+        return $this->signal;
+    }
+    public function setSignal($signal) {
+        $this->signal = $signal;
         return $this;
     }
 }
