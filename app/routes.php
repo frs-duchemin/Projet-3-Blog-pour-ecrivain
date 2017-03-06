@@ -22,13 +22,12 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
 
     $comments = $app['dao.comment']->findAllParentByArticle($id);
-
     $childrenComments = [];
     $childrenCommentsLevel2 = [];
     foreach ($comments as $comment) {
-        $childrenComments[$comment->getId()]= $app['dao.comment']->findAllChildren($comment->getId());
+        $childrenComments[$comment->getId()]= $app['dao.comment']->findAllChildren($comment);
         foreach ($childrenComments[$comment->getId()] as $children) {
-            $childrenCommentsLevel2[$children->getId()]= $app['dao.comment']->findAllChildren($children->getId());
+            $childrenCommentsLevel2[$children->getId()]= $app['dao.comment']->findAllChildren($children);
         }
     }
 
@@ -52,10 +51,14 @@ $app->get('/login', function(Request $request) use ($app) {
 $app->get('/admin', function() use ($app) {
     $articles = $app['dao.article']->findAll();
     $comments = $app['dao.comment']->findAllBySignal();
+
     return $app['twig']->render('admin.html.twig', array(
         'articles' => $articles,
         'comments' => $comments));
+
 })->bind('admin');
+
+
 
 // Add a new article
 $app->match('/admin/article/add', function(Request $request) use ($app) {

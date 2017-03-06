@@ -69,9 +69,30 @@ class CommentDAO extends DAO
         }
         return $comments;
     }
-    public function findAllChildren($commentId) {
+    public function findAllChildren($comment) {
         $sql = "select * from t_comment where parent_id=? order by com_id";
-        $result = $this->getDb()->fetchAll($sql, array($commentId));
+        $result = $this->getDb()->fetchAll($sql, array($comment->getId()));
+
+        // Convert query result to an array of domain objects
+        $childrenComments = array();
+        foreach ($result as $row) {
+            $comId = $row['com_id'];
+            $childrenComment = $this->buildDomainObject($row);
+            // The associated article is defined for the constructed comment
+           // $comment->setArticle($article);
+            $childrenComments[$comId] = $childrenComment;
+        }
+        return $childrenComments;
+    }
+    public function addSignal($comment)
+    {
+        $comment->setSignal(true);
+        $this->save($comment);
+    }
+
+    public function findAllBySignal(){
+        $sql = "select * from t_comment order by signale desc, com_id desc";
+        $result = $this->getDb()->fetchAll($sql, array());
 
         // Convert query result to an array of domain objects
         $comments = array();
@@ -79,21 +100,15 @@ class CommentDAO extends DAO
             $comId = $row['com_id'];
             $comment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-           // $comment->setArticle($article);
+            // $comment->setArticle($article);
             $comments[$comId] = $comment;
         }
         return $comments;
     }
-    public function addSignal($comment)
-    {
-        $comment->setSignal(true);
-        $this->save($comment);
-    }
-    public function findAllBySignal()
-    {
-        
-    }
-    /**
+
+
+
+     /**
      * Creates an Comment object based on a DB row.
      *
      * @param array $row The DB row containing Comment data.
