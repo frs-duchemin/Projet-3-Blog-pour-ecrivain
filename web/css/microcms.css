@@ -7,3 +7,8 @@ body {
     padding-top: 10px;
     text-align: center;
 }
+
+#errorPanel {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
