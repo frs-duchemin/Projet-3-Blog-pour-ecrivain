@@ -34,6 +34,16 @@ class CommentDAO extends DAO
     }
 
     /**
+     * Removes a comment from the database.
+     *
+     * @param @param integer $id The comment id
+     */
+    public function delete($id) {
+        // Delete the comment
+        $this->getDb()->delete('t_comment', array('com_id' => $id));
+    }
+
+    /**
      * Return a list of all comments for an article, sorted by date (most recent last).
      *
      * @param integer commentId The article id.
@@ -106,9 +116,16 @@ class CommentDAO extends DAO
         return $comments;
     }
 
+    /**
+     * Removes all comments for an article
+     *
+     * @param $articleId The id of the article
+     */
+    public function deleteAllByArticle($articleId) {
+        $this->getDb()->delete('t_comment', array('art_id' => $articleId));
+    }
 
-
-     /**
+    /**
      * Creates an Comment object based on a DB row.
      *
      * @param array $row The DB row containing Comment data.
