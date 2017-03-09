@@ -4,13 +4,14 @@
             <thead>
             <tr>
                 <th>Signalé</th>
+                <th>Auteur</th>
                 <th>Contenu</th>
-
             </tr>
             </thead>
             {% for comment in comments %}
                 <tr{%  if  comment.signal %} class="alert alert-danger"{%  endif %}>
                     <td>{%  if  comment.signal %} Oui {%  endif %}</td>
+                    <td>{{ comment.author }}</td>
                     <td>{{ comment.content | truncate(60) }}</td>
                     <td>
                         <a href="{{ path('admin_comment_edit', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
@@ -21,14 +22,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Confirmation demandée</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Do you really want to delete this comment ?
+                                        Voulez_vous supprimer ce commentaire ainsi que les commentaires associés ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <a href="{{ path('admin_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">Confirm</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                        <a href="{{ path('admin_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">Confirmer</a>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->

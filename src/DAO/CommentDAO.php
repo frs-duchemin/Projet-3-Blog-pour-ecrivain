@@ -16,7 +16,7 @@ class CommentDAO extends DAO
     }
 
     /**
-     * Returns an article matching the supplied id.
+    * Returns an article matching the supplied id.
      *
      * @param integer $id
      *
@@ -51,7 +51,7 @@ class CommentDAO extends DAO
      * @return array A list of all comments for the article.
      */
     public function findAllByArticle($articleId) {
-        $sql = "select com_id, com_content from t_comment where art_id=? order by com_id";
+        $sql = "select com_id, com_author, com_content from t_comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -144,6 +144,7 @@ class CommentDAO extends DAO
         }
         $commentData = array(
             'com_content' => $comment->getContent(),
+            'com_author' => $comment->getAuthor(),
             'art_id' => $comment->getArticle()->getId(),
             'parent_id' => $parent,
             'signale' => $comment->getSignal(),
@@ -164,6 +165,7 @@ class CommentDAO extends DAO
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['com_id']);
+        $comment->setAuthor($row['com_author']);
         $comment->setContent($row['com_content']);
         $comment->setSignal($row['signale']);
 

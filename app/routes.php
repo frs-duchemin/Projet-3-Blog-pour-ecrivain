@@ -61,7 +61,7 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
     $articleForm->handleRequest($request);
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
-        $app['session']->getFlashBag()->add('success', 'The article was successfully created.');
+        $app['session']->getFlashBag()->add('success', 'L\'article a été ajouté');
     }
     return $app['twig']->render('article_form.html.twig', array(
         'title' => 'New article',
@@ -75,10 +75,10 @@ $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($ap
     $articleForm->handleRequest($request);
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
-        $app['session']->getFlashBag()->add('success', 'The article was successfully updated.');
+        $app['session']->getFlashBag()->add('success', 'L\'article a été mis à jour');
     }
     return $app['twig']->render('article_form.html.twig', array(
-        'title' => 'Edit article',
+        'title' => 'Editer un article',
         'articleForm' => $articleForm->createView()));
 })->bind('admin_article_edit');
 
@@ -88,7 +88,7 @@ $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($ap
     $app['dao.comment']->deleteAllByArticle($id);
     // Delete the article
     $app['dao.article']->delete($id);
-    $app['session']->getFlashBag()->add('success', 'The article was successfully removed.');
+    $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé');
     // Redirect to admin home page
     return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_article_delete');
@@ -138,7 +138,7 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
     $commentForm->handleRequest($request);
     if ($commentForm->isSubmitted() && $commentForm->isValid()) {
         $app['dao.comment']->save($comment);
-        $app['session']->getFlashBag()->add('success', 'The comment was successfully updated.');
+        $app['session']->getFlashBag()->add('success', 'Le commentaire a été mis à jour.');
     }
     return $app['twig']->render('comment_form.html.twig', array(
         'title' => 'Edit comment',
@@ -148,7 +148,7 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
 // Remove a comment
 $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
     $app['dao.comment']->delete($id);
-    $app['session']->getFlashBag()->add('success', 'The comment was successfully removed.');
+    $app['session']->getFlashBag()->add('success', 'Le commentaire a été supprimé.');
     // Redirect to admin home page
     return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_comment_delete');

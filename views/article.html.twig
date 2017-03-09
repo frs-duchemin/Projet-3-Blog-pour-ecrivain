@@ -8,20 +8,20 @@
     {{ parent() }}
     <p>{{ article.content }}</p>
     <h3>Commentaires</h3>
-    <a class="btn btn-default" href="{{ path('comment_add', { 'id': article.id }) }}">Ajouter un commentaire</a>
+    <a class="btn btn-primary" href="{{ path('comment_add', { 'id': article.id }) }}">Ajouter un commentaire</a>
     <br>
     {% for comment in comments %}
         <div class="panel panel-default">
             <div class="panel-body">
-                {{ comment.content }}<br>
-                <a class="btn btn-default pull-right" href="{{ path('comment_signal', { 'id': comment.id }) }}">Signaler le commentaire</a>
-                <a class="btn btn-default pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': comment.id }) }}">Répondre</a>
+                <strong>{{ comment.author }}</strong> a commenté : {{ comment.content }}<br>
+                <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': comment.id }) }}">Signaler le commentaire</a>
+                <a class="btn btn-primary pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': comment.id }) }}">Répondre</a>
             </div>
         </div>
         {% for children in childrenComments[comment.id] %}
         <div class="panel panel-default col-lg-offset-1">
             <div class="panel-body">
-                {{ children.content }}<br>
+                <strong>{{ comment.author }}</strong> a commenté : {{ children.content }}<br>
                 <a class="btn btn-default pull-right" href="{{ path('comment_signal', { 'id': children.id }) }}">Signaler le commentaire</a>
                 <a class="btn btn-default pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': children.id }) }}">Répondre</a>
             </div>
@@ -29,7 +29,7 @@
             {% for children2 in childrenCommentsLevel2[children.id] %}
                 <div class="panel panel-default col-lg-offset-2">
                     <div class="panel-body">
-                        {{ children2.content }}<br>
+                        <strong>{{ comment.author }}</strong> a commenté : {{ children2.content }}<br>
                         <a class="btn btn-default pull-right" href="{{ path('comment_signal', { 'id': children2.id }) }}">Signaler le commentaire</a>
                     </div>
                 </div>

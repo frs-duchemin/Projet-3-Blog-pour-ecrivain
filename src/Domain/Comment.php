@@ -15,6 +15,14 @@ class Comment
      * @var integer
      */
     private $content;
+
+    /**
+     * Comment author.
+     *
+     * @var string
+     */
+    private $author;
+
     /**
      * Associated article.
      *
@@ -40,6 +48,15 @@ class Comment
     }
     public function setId($id) {
         $this->id = $id;
+        return $this;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function setAuthor($author) {
+        $this->author = $author;
         return $this;
     }
 
