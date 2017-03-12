@@ -24,6 +24,14 @@ class Comment
     private $author;
 
     /**
+     * Comment date.
+     *
+     * @var datetime
+     */
+    private $date;
+
+
+    /**
      * Associated article.
      *
      * @var \MicroCMS\Domain\Article
@@ -67,6 +75,15 @@ class Comment
         $this->content = $content;
         return $this;
     }
+    public function getDate() {
+        return $this->date;
+    }
+    public function setDate($date) {
+        $this->date = $date;
+        return $this;
+    }
+
+
     public function getArticle() {
         return $this->article;
     }

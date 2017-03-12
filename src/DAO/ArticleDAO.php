@@ -44,6 +44,8 @@ class ArticleDAO extends DAO
         $articleData = array(
             'art_title' => $article->getTitle(),
             'art_content' => $article->getContent(),
+
+
         );
 
         if ($article->getId()) {
@@ -79,6 +81,9 @@ class ArticleDAO extends DAO
         $article->setId($row['art_id']);
         $article->setTitle($row['art_title']);
         $article->setContent($row['art_content']);
+        $article->setDate($row['art_date']);
+
+
         return $article;
     }
 }

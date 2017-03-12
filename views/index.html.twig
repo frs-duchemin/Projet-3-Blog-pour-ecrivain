@@ -3,10 +3,30 @@
 {% block title %}Accueil{% endblock %}
 
 {% block content %}
+    <div class="container">
     {% for article in articles %}
-        <article>
-            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
-            <p>{{ article.content | truncate(500)}}</p>
-        </article>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    <a href="post.html">
+                        <h2 class="post-title">
+                            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <p>{{ article.content | truncate(100)}}</p>
+                        </h3>
+                    </a>
+                    <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a> le {{ article.date }}</p>
+                </div>
+                <hr>
+            </div>
+        </div>
     {% endfor %}
+    <ul class="pager">
+        <li class="next">
+            <a href="#">Anciens posts &rarr;</a>
+        </li>
+    </ul>
+    </div>
 {% endblock %}

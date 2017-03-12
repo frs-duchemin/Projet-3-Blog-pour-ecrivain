@@ -25,6 +25,14 @@ class Article
      */
     private $content;
 
+    /**
+     * Article date.
+     *
+     * @var datetime
+     */
+    private $date;
+
+
     public function getId() {
         return $this->id;
     }
@@ -51,4 +59,14 @@ class Article
         $this->content = $content;
         return $this;
     }
+    public function getDate() {
+        return $this->date;
+    }
+
+    public function setDate($date) {
+        $this->date = $date;
+        return $this;
+    }
+
+
 }
