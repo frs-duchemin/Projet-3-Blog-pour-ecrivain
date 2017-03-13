@@ -250,6 +250,12 @@ hr.small {
   text-decoration: none;
   color: #333333;
 }
+.panel-body > .post-meta {
+  color: #777777;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+}
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
   color: #0085A1;

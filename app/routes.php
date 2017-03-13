@@ -5,6 +5,7 @@ use MicroCMS\Domain\Article;
 use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Form\Type\ArticleType;
 
+
 // Home page
     $app->get('/', function () use ($app) {
         $articles = $app['dao.article']->findAll();
@@ -115,20 +116,6 @@ use MicroCMS\Form\Type\ArticleType;
             return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
         })
     ->bind('comment_signal');
-
-// Edit an existing comment
-    $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($app) {
-        $comment = $app['dao.comment']->find($id);
-        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $app['dao.comment']->save($comment);
-            $app['session']->getFlashBag()->add('success', 'Le commentaire a été mis à jour.');
-        }
-        return $app['twig']->render('comment_form.html.twig', array(
-            'title' => 'Edit comment',
-            'commentForm' => $commentForm->createView()));
-    })->bind('admin_comment_edit');
 
 // Remove a comment
     $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {

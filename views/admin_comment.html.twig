@@ -3,20 +3,18 @@
         <table class="table table-hover table-condensed">
             <thead>
             <tr>
-                <th>Signalé</th>
+                <th style="display:none;">Signalé</th>
                 <th>Auteur</th>
                 <th>Contenu</th>
             </tr>
             </thead>
             {% for comment in comments %}
                 <tr{%  if  comment.signal %} class="alert alert-danger"{%  endif %}>
-
-                    <td>{%  if  comment.signal %} Oui {%  endif %}</td>
+                    <td style="display:none;">{%  if  comment.signal %} Oui {%  endif %}</td>
                     <td>{{ comment.author }}</td>
                     <td>{{ comment.content | truncate(60) }}</td>
                     <td>
-                        <a href="{{ path('admin_comment_edit', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                        <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
+                        <button type="button" class="btn btn-danger btn-xs pull-right" title="Supprimer" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
                         </button>
                         <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -43,4 +41,3 @@
 {% else %}
     <div class="alert alert-warning">Aucun commentaire trouvé.</div>
 {% endif %}
-<a href="{{ path('admin_article_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un commentaire </button></a>

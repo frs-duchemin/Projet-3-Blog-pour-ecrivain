@@ -54,7 +54,7 @@
 {% endblock %}
 
 {% block header %}
-<header class="intro-header" style="background-image: url('images/alaska1.jpg')">
+<header class="intro-header" style="background-image: url('{{ asset('images/alaska1.jpg') }}')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -80,7 +80,8 @@
             {% endfor %}
         {% endblock %}
     </div>
-    {% block footer %}
+
+{% block footer %}
     <footer>
         <div class="container">
             <div class="row">
@@ -90,16 +91,19 @@
             </div>
         </div>
     </footer>
-    {% endblock %}
+{% endblock %}
 
-    {% block javascript %}
-<!-- jQuery -->
-<script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
-<!-- JavaScript Boostrap plugin -->
-<script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-
-<script src="{{ asset('/js/clean-blog.js') }}"></script>
-    {% endblock %}
+{% block javascript %}
+    <!-- jQuery -->
+    <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/clean-blog.js') }}"></script>
+    <!-- Tinymce -->
+    <script src="{{ asset('/js/tinymce/jquery.tinymce.min.js') }}"></script>
+    <script src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+{% endblock %}
 
 </body>
 </html>

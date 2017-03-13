@@ -1,11 +1,8 @@
 {% extends "layout.html.twig" %}
-
 {% block title %}Accueil{% endblock %}
-
 {% block content %}
     <div class="container">
     {% for article in articles %}
-
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
@@ -14,10 +11,17 @@
                             <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
                         </h2>
                         <h3 class="post-subtitle">
-                            <p>{{ article.content | truncate(100)}}</p>
+                            <p>{{ article.content | truncate(50)}}</p>
                         </h3>
                     </a>
-                    <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a> le {{ article.date }}</p>
+                    <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a>
+                        {% set dateTime = date(article.date) %}Le
+                        <span class="day">{{ dateTime | date('d') }}</span>
+                        <span class="month">{{ dateTime | date('m') }}</span>
+                        <span class="year">{{ dateTime | date('Y') }}</span> à
+                        <span class="day">{{ dateTime | date('H') }}</span>:
+                        <span class="month">{{ dateTime | date('i') }}</span>
+                    </p>
                 </div>
                 <hr>
             </div>
