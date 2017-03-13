@@ -12,7 +12,7 @@
                 <tr{%  if  comment.signal %} class="alert alert-danger"{%  endif %}>
                     <td style="display:none;">{%  if  comment.signal %} Oui {%  endif %}</td>
                     <td>{{ comment.author }}</td>
-                    <td>{{ comment.content | truncate(60) }}</td>
+                    <td>{{ comment.content | truncate(60) | raw }}</td>
                     <td>
                         <button type="button" class="btn btn-danger btn-xs pull-right" title="Supprimer" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
                         </button>

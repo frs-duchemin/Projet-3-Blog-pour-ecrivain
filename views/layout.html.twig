@@ -45,7 +45,7 @@
                             </ul>
                         </li>
                     {% endif %}
-                    <a class="navbar-brand" href="#">A propos</a>
+                    <a class="navbar-brand" href="{{ path('about')}}">A propos</a>
 
                 </ul>
             </div>
@@ -80,6 +80,13 @@
             {% endfor %}
         {% endblock %}
     </div>
+<ul class="nav pull-right scroll-top">
+    <li>
+        <a href="#" title="Scroll to top">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+        </a>
+    </li>
+</ul>
 
 {% block footer %}
     <footer>
@@ -102,7 +109,7 @@
     <!-- Tinymce -->
     <script src="{{ asset('/js/tinymce/jquery.tinymce.min.js') }}"></script>
     <script src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({ selector:'textarea', language:'fr_FR' });</script>
 {% endblock %}
 
 </body>

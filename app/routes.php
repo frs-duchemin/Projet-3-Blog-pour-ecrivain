@@ -6,13 +6,18 @@ use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Form\Type\ArticleType;
 
 
-// Home page
+// Page d'accueil
     $app->get('/', function () use ($app) {
         $articles = $app['dao.article']->findAll();
         return $app['twig']->render('index.html.twig', array('articles' => $articles));
     })->bind('home');
 
-// Article details with comments
+// Page d'accueil
+$app->get('/about', function () use ($app) {
+       return $app['twig']->render('about.html.twig');
+})->bind('about');
+
+// Détails article avec les commentaires
     $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         $article = $app['dao.article']->find($id);
         $comments = $app['dao.comment']->findAllParentByArticle($id);
@@ -32,7 +37,7 @@ use MicroCMS\Form\Type\ArticleType;
         ));
     })->bind('article');
 
-// Login form
+// Page de login
     $app->get('/login', function(Request $request) use ($app) {
         return $app['twig']->render('login.html.twig', array(
             'error'         => $app['security.last_error']($request),
@@ -40,7 +45,7 @@ use MicroCMS\Form\Type\ArticleType;
         ));
     })->bind('login');
 
-// Admin home page
+// Page accueil administration
     $app->get('/admin', function() use ($app) {
         $articles = $app['dao.article']->findAll();
         $comments = $app['dao.comment']->findAllBySignal();
@@ -49,7 +54,7 @@ use MicroCMS\Form\Type\ArticleType;
             'comments' => $comments));
     })->bind('admin');
 
-// Add a new article
+// Formulaire ajout article
     $app->match('/admin/article/add', function(Request $request) use ($app) {
         $article = new Article();
         $articleForm = $app['form.factory']->create(ArticleType::class, $article);
@@ -63,7 +68,7 @@ use MicroCMS\Form\Type\ArticleType;
             'articleForm' => $articleForm->createView()));
     })->bind('admin_article_add');
 
-// Edit an existing article
+// Editer un article
     $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($app) {
         $article = $app['dao.article']->find($id);
         $articleForm = $app['form.factory']->create(ArticleType::class, $article);
@@ -77,18 +82,18 @@ use MicroCMS\Form\Type\ArticleType;
             'articleForm' => $articleForm->createView()));
     })->bind('admin_article_edit');
 
-// Remove an article
+// Supprimer un article
     $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($app) {
-    // Delete all associated comments
+    // Supprimer tous les commentaires associés à l'article
         $app['dao.comment']->deleteAllByArticle($id);
-    // Delete the article
+    // Supprimer l'article
         $app['dao.article']->delete($id);
         $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé');
-    // Redirect to admin home page
+    // Redirection page d'accueil administration
         return $app->redirect($app['url_generator']->generate('admin'));
     })->bind('admin_article_delete');
 
-// Add a new Comment
+// Ajouter un commentaire
     $app->match('/article/{id}/comment/add/{parentId}', function($id, $parentId, Request $request) use ($app) {
         $article = $app['dao.article']->find($id);
         $comment = new Comment();
@@ -117,13 +122,15 @@ use MicroCMS\Form\Type\ArticleType;
         })
     ->bind('comment_signal');
 
-// Remove a comment
+// Supprimer un commentaire
     $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
         $app['dao.comment']->delete($id);
-        // Delete all associated comments
+    // Supprimer les commentaires associés (enfants)
         $app['dao.comment']->deleteAllChildrens($id);
-        $app['session']->getFlashBag()->add('success', 'Le commentaire et ses enfants a été supprimé.');
-
-        // Redirect to admin home page
+        $app['session']->getFlashBag()->add('success', 'Le commentaire et ses enfants ont été supprimés.');
+    // Redirection page d'accueil administration
         return $app->redirect($app['url_generator']->generate('admin'));
     })->bind('admin_comment_delete');
+
+
+

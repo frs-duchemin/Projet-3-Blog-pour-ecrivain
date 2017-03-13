@@ -6,8 +6,6 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h2>{{ article.title }}</h2>
-
                 </div>
             </div>
         </div>
@@ -20,7 +18,7 @@
         <p>
             <h2>{{ article.title }}</h2>
             {{ parent() }}
-            <p>{{ article.content }}</p>
+            <p>{{ article.content | raw}}</p>
             <h3>Commentaires</h3>
             <a class="btn btn-primary" href="{{ path('comment_add', { 'id': article.id }) }}">Ajouter un commentaire</a>
             <br>
@@ -28,50 +26,35 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <p class="post-meta">
-                            {% set dateTime = date(comment.date) %}Le
-                            <span class="day">{{ dateTime | date('d') }}</span>
-                            <span class="month">{{ dateTime | date('m') }}</span>
-                            <span class="year">{{ dateTime | date('Y') }}</span> à
-                            <span class="day">{{ dateTime | date('H') }}</span>:
-                            <span class="month">{{ dateTime | date('i') }}</span>:
-                            <span class="month">{{ dateTime | date('s') }}</span>
+                            Le {{ comment.date|date("d/m/Y \\à\\ H:i:s") }}
+                            <strong>{{ comment.author }}</strong> a commenté : {{ comment.content | raw }}
+                            <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': comment.id }) }}">Signaler le commentaire</a>
+                            <a class="btn btn-primary pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': comment.id }) }}">Répondre</a>
                         </p>
-                        <strong>{{ comment.author }}</strong> a commenté : {{ comment.content }}<br>
-                        <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': comment.id }) }}">Signaler le commentaire</a>
-                        <a class="btn btn-primary pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': comment.id }) }}">Répondre</a>
+
                     </div>
                 </div>
                 {% for children in childrenComments[comment.id] %}
                     <div class="panel panel-default col-lg-offset-1">
                         <div class="panel-body">
                             <p class="post-meta">
-                                {% set dateTime = date(children.date) %}Le
-                                <span class="day">{{ dateTime | date('d') }}</span>
-                                <span class="month">{{ dateTime | date('m') }}</span>
-                                <span class="year">{{ dateTime | date('Y') }}</span> à
-                                <span class="day">{{ dateTime | date('H') }}</span>:
-                                <span class="month">{{ dateTime | date('i') }}</span>:
-                                <span class="month">{{ dateTime | date('s') }}</span>
+                                Le {{ children.date|date("d/m/Y \\à\\ H:i:s") }}
+                                <strong>{{ children.author }}</strong> a commenté : {{ children.content | raw }}<br>
+                                <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': children.id }) }}">Signaler le commentaire</a>
+                                <a class="btn btn-primary pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': children.id }) }}">Répondre</a>
                             </p>
-                            <strong>{{ children.author }}</strong> a commenté : {{ children.content }}<br>
-                            <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': children.id }) }}">Signaler le commentaire</a>
-                            <a class="btn btn-primary pull-right" href="{{ path('comment_add', { 'id': article.id, 'parentId': children.id }) }}">Répondre</a>
+
                         </div>
                     </div>
                     {% for children2 in childrenCommentsLevel2[children.id] %}
                         <div class="panel panel-default col-lg-offset-2">
                             <div class="panel-body">
                                 <p class="post-meta">
-                                    {% set dateTime = date(children2.date) %}Le
-                                    <span class="day">{{ dateTime | date('d') }}</span>
-                                    <span class="month">{{ dateTime | date('m') }}</span>
-                                    <span class="year">{{ dateTime | date('Y') }}</span> à
-                                    <span class="day">{{ dateTime | date('H') }}</span>:
-                                    <span class="month">{{ dateTime | date('i') }}</span>:
-                                    <span class="month">{{ dateTime | date('s') }}</span>
+                                    Le {{ children2.date|date("d/m/Y \\à\\ H:i:s") }}
+                                    <strong>{{ children2.author }}</strong> a commenté : {{ children2.content | raw }}<br>
+                                    <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': children2.id }) }}">Signaler le commentaire</a>
                                 </p>
-                                <strong>{{ children2.author }}</strong> a commenté : {{ children2.content }}<br>
-                                <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': children2.id }) }}">Signaler le commentaire</a>
+
                             </div>
                         </div>
                     {%  endfor %}

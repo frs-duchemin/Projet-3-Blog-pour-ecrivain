@@ -22,7 +22,11 @@ h4,
 h5,
 h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 800;
+  font-weight: 600;
+}
+.panel p {
+  font-size: 18px;
+
 }
 a {
   color: #333333;
@@ -346,11 +350,11 @@ form .row:first-child .floating-label-form-group {
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 10px;
+  font-weight: 500;
   letter-spacing: 1px;
   border-radius: 0;
-  padding: 15px 25px;
+  padding: 5px 5px;
 }
 .btn-lg {
   font-size: 16px;
@@ -411,3 +415,14 @@ img::-moz-selection {
 body {
   -webkit-tap-highlight-color: #0085A1;
 }
+.scroll-top {
+  position:fixed;
+  bottom:0;
+  right:6%;
+  z-index:100;
+
+  font-size:20px;
+  border-top-left-radius:3px;
+  border-top-right-radius:3px;
+}
+

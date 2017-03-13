@@ -28,7 +28,6 @@ $app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
 });
 
 $app->register(new Silex\Provider\ValidatorServiceProvider());
-
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(

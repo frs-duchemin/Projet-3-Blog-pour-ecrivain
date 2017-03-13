@@ -11,16 +11,12 @@
                             <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
                         </h2>
                         <h3 class="post-subtitle">
-                            <p>{{ article.content | truncate(50)}}</p>
+                            <p>{{ article.content | truncate(100) | raw }}</p>
                         </h3>
                     </a>
                     <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a>
-                        {% set dateTime = date(article.date) %}Le
-                        <span class="day">{{ dateTime | date('d') }}</span>
-                        <span class="month">{{ dateTime | date('m') }}</span>
-                        <span class="year">{{ dateTime | date('Y') }}</span> à
-                        <span class="day">{{ dateTime | date('H') }}</span>:
-                        <span class="month">{{ dateTime | date('i') }}</span>
+                        Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
+
                     </p>
                 </div>
                 <hr>
@@ -32,5 +28,6 @@
             <a href="#">Anciens posts &rarr;</a>
         </li>
     </ul>
+
     </div>
 {% endblock %}

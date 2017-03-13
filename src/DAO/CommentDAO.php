@@ -131,7 +131,6 @@ class CommentDAO extends DAO
         $this->getDb()->delete('t_comment', array('parent_id' => $parentId));
     }
 
-
     /**
      * Creates an Comment object based on a DB row.
      *
