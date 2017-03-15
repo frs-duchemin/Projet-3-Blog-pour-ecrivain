@@ -9,7 +9,7 @@ class ArticleDAO extends DAO
      * @return array A list of all articles.
      */
     public function findAll() {
-        $sql = "select * from t_article order by art_id desc";
+        $sql = "select  * from t_article order by art_id desc";
         $result = $this->getDb()->fetchAll($sql);
         // Convert query result to an array of domain objects
         $articles = array();
@@ -19,6 +19,7 @@ class ArticleDAO extends DAO
         }
         return $articles;
     }
+
     /**
      * Returns an article matching the supplied id.
      *

@@ -62,4 +62,3 @@ $app['dao.comment'] = function ($app) {
 
     return $commentDAO;
 };
-

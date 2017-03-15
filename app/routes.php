@@ -12,7 +12,7 @@ use MicroCMS\Form\Type\ArticleType;
         return $app['twig']->render('index.html.twig', array('articles' => $articles));
     })->bind('home');
 
-// Page d'accueil
+// Page about
 $app->get('/about', function () use ($app) {
        return $app['twig']->render('about.html.twig');
 })->bind('about');
@@ -121,6 +121,20 @@ $app->get('/about', function () use ($app) {
             return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
         })
     ->bind('comment_signal');
+
+// Editer un commentaire
+$app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($app) {
+    $comment = $app['dao.comment']->find($id);
+    $commentForm = $app['form.factory']->create(CommentType::class, $comment);
+    $commentForm->handleRequest($request);
+    if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+        $app['dao.comment']->save($comment);
+        $app['session']->getFlashBag()->add('success', 'L\'comment a été mis à jour');
+    }
+    return $app['twig']->render('comment_form.html.twig', array(
+        'title' => 'Editer un commentaire',
+        'commentForm' => $commentForm->createView()));
+})->bind('admin_comment_edit');
 
 // Supprimer un commentaire
     $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
