@@ -1,20 +1,29 @@
+
 {% extends "layout.html.twig" %}
 {% block title %}Accueil{% endblock %}
 {% block content %}
-    <div class="container">
+    <script>$(function() {
+            $(selector).pagination({
+                items: 100,
+                itemsOnPage: 10,
+                cssStyle: 'light-theme'
+            });
+        });</script>
+    <div class="container" xmlns="http://www.w3.org/1999/html">
 
     {% for article in articles %}
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
-                    <a href="post.html">
+
                         <h2 class="post-title">
-                            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+                            <h2><a class="articleTitle center-block" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
                         </h2>
-                        <h3 class="post-subtitle">
-                            <p>{{ article.content | truncate(100) | raw }}</p>
-                        </h3>
-                    </a>
+                        <p class="post-subtitle">
+                    {{ article.content | truncate(100) | raw }}
+                        </p>
+                    <a class="post-meta" href="{{ path('article', { 'id': article.id }) }}">[Lire la suite...]</a>
+
                     <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a>
                         Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
 
@@ -24,11 +33,7 @@
             </div>
         </div>
     {% endfor %}
-    <ul class="pager">
-        <li class="next">
-            <a href="#">Anciens posts &rarr;</a>
-        </li>
-    </ul>
 
     </div>
+
 {% endblock %}

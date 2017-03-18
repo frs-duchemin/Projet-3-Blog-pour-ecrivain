@@ -49,6 +49,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
 ));
 
+
 // Register services
 $app['dao.article'] = function ($app) {
     return new MicroCMS\DAO\ArticleDAO($app['db']);

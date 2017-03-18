@@ -1,7 +1,9 @@
+
 <?php
 
-// Page d'accueil
-$app->get('/', "MicroCMS\Controller\HomeController::indexAction")
+// Home page
+$app->get('/',"MicroCMS\Controller\HomeController::indexAction")
+
     ->bind('home');
 
 // Détails article avec les commentaires
@@ -47,7 +49,45 @@ $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::de
 
 // Page about
 $app->get('/about', "MicroCMS\Controller\HomeController::aboutAction")
-->bind('about');
+    ->bind('about');
+
+$app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
+
+    $user = $app['dao.user']->find($id);
+
+    $userForm = $app['form.factory']->create(UserType::class, $user);
+
+    $userForm->handleRequest($request);
+
+    if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+        $plainPassword = $user->getPassword();
+
+        // find the encoder for the user
+
+        $encoder = $app['security.encoder_factory']->getEncoder($user);
+
+        // compute the encoded password
+
+        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+
+        $user->setPassword($password);
+
+        $app['dao.user']->save($user);
+
+        $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
+
+    }
+
+    return $app['twig']->render('user_form.html.twig', array(
+
+        'title' => 'Edit user',
+
+        'userForm' => $userForm->createView()));
+
+})->bind('admin_user_edit');
+
+
 
 
 

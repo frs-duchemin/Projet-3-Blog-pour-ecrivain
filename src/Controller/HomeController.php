@@ -5,6 +5,9 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use MicroCMS\Domain\Comment;
 use MicroCMS\Form\Type\CommentType;
+use MicroCMS\PaginationTrait;
+use MicroCMS\PaginationServiceProvider;
+
 
 class HomeController {
 
@@ -64,10 +67,10 @@ class HomeController {
         return $app['twig']->render('comment_form.html.twig', array(
             'commentForm' => $commentForm->createView()));
 
-}
+    }
 
     // Signalement comentaire
-        public function signalAction( Application $id,  $app)
+    public function signalAction( Application $id,  $app)
     {
         $comment = $app['dao.comment']->find($id);
         $app['dao.comment']->addSignal($comment);
