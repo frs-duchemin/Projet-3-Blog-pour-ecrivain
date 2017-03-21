@@ -110,4 +110,6 @@ class UserDAO extends DAO implements UserProviderInterface
         $user->setRole($row['usr_role']);
         return $user;
     }
+
+
 }

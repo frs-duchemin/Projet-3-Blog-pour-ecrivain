@@ -1,6 +1,8 @@
 
 <?php
 
+////////////////////////////////HOME///////////////////////////////
+
 // Home page
 $app->get('/',"MicroCMS\Controller\HomeController::indexAction")
 
@@ -15,13 +17,18 @@ $app->match('/article/{id}/comment/add/{parentId}', "MicroCMS\Controller\HomeCon
     ->value('parentId', false)
     ->bind('comment_add');
 
-// Signalement comentaire
+// Signalement commentaire
 $app->match('/comment/{id}/signal', "MicroCMS\Controller\HomeController::signalAction")
     ->bind('comment_signal');
 
 // Page de login
 $app->get('/login', "MicroCMS\Controller\HomeController::loginAction")
     ->bind('login');
+
+// Page about
+$app->get('/about', "MicroCMS\Controller\HomeController::aboutAction")
+    ->bind('about');
+////////////////////////////ADMIN///////////////////////////////////
 
 // Page accueil administration
 $app->get('/admin', "MicroCMS\Controller\AdminController::indexAction")
@@ -46,48 +53,5 @@ $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::ed
 // Supprimer un commentaire
 $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::deleteCommentAction")
     ->bind('admin_comment_delete');
-
-// Page about
-$app->get('/about', "MicroCMS\Controller\HomeController::aboutAction")
-    ->bind('about');
-
-$app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
-
-    $user = $app['dao.user']->find($id);
-
-    $userForm = $app['form.factory']->create(UserType::class, $user);
-
-    $userForm->handleRequest($request);
-
-    if ($userForm->isSubmitted() && $userForm->isValid()) {
-
-        $plainPassword = $user->getPassword();
-
-        // find the encoder for the user
-
-        $encoder = $app['security.encoder_factory']->getEncoder($user);
-
-        // compute the encoded password
-
-        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
-
-        $user->setPassword($password);
-
-        $app['dao.user']->save($user);
-
-        $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
-
-    }
-
-    return $app['twig']->render('user_form.html.twig', array(
-
-        'title' => 'Edit user',
-
-        'userForm' => $userForm->createView()));
-
-})->bind('admin_user_edit');
-
-
-
 
 

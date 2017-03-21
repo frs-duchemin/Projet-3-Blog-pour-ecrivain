@@ -16,16 +16,19 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
 
-                        <h2 class="post-title">
-                            <h2><a class="articleTitle center-block" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+                        <h2 class="post-title" >
+                            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
                         </h2>
                         <p class="post-subtitle">
-                    {{ article.content | truncate(100) | raw }}
+                    {{ article.content | truncate(150) | raw }}
                         </p>
-                    <a class="post-meta" href="{{ path('article', { 'id': article.id }) }}">[Lire la suite...]</a>
+                    <a class="post-meta"   href="{{ path('article', { 'id': article.id }) }}" >[Lire la suite...]</a>
 
-                    <p class="post-meta">Publié par <a href="#">Jean-Forteroche</a>
+                    <p class="post-meta">Publié par <a href="{{ path('about') }}">Jean-Forteroche</a>
                         Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
+
+
+
 
                     </p>
                 </div>

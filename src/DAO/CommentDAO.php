@@ -16,7 +16,7 @@ class CommentDAO extends DAO
     }
 
     /**
-    * Returns an article matching the supplied id.
+     * Returns an article matching the supplied id.
      *
      * @param integer $id
      *
@@ -86,7 +86,7 @@ class CommentDAO extends DAO
             $comId = $row['com_id'];
             $childrenComment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-           // $comment->setArticle($article);
+            // $comment->setArticle($article);
             $childrenComments[$comId] = $childrenComment;
         }
         return $childrenComments;

@@ -5,8 +5,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use MicroCMS\Domain\Comment;
 use MicroCMS\Form\Type\CommentType;
-use MicroCMS\PaginationTrait;
-use MicroCMS\PaginationServiceProvider;
+use MicroCMS\Domain\CommentDAO;
 
 
 class HomeController {
@@ -48,15 +47,17 @@ class HomeController {
     }
 
 
-    public function addCommentAction( Application $id, $parentId, Request $request, $app)
+    public function addCommentAction(  $id, $parentId, Request $request, Application $app)
     {
         $article = $app['dao.article']->find($id);
         $comment = new Comment();
         $comment->setArticle($article);
+
         if ($parentId) {
             $parent = $app['dao.comment']->find($parentId);
             $comment->setParent($parent);
         }
+
         $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
@@ -70,15 +71,13 @@ class HomeController {
     }
 
     // Signalement comentaire
-    public function signalAction( Application $id,  $app)
+    public function signalAction(  $id,  Application $app)
     {
         $comment = $app['dao.comment']->find($id);
         $app['dao.comment']->addSignal($comment);
         $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
         return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
     }
-
-
 
     /**
      * User login controller.

@@ -7,6 +7,7 @@ body {
   font-family: 'Lora', 'Times New Roman', serif;
   font-size: 20px;
   color: #333333;
+  background-color: #dbdce0;
 }
 p {
   line-height: 1.5;
@@ -33,7 +34,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #0085A1;
+  color: #880716;
 }
 a img:hover,
 a img:focus {
@@ -59,6 +60,7 @@ hr.small {
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
+  font-size: 16px;
 }
 .navbar-custom .navbar-header .navbar-toggle {
   color: #777777;
@@ -98,7 +100,7 @@ hr.small {
   }
   .navbar-custom .nav li ul.dropdown-menu a:hover,
   .navbar-custom .nav li ul.dropdown-menu a:focus {
-    color: #0085A1;
+    color: #880716;
   }
 }
 @media only screen and (min-width: 1170px) {
@@ -130,14 +132,14 @@ hr.small {
   }
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
-    color: #0085A1;
+    color: #880716;
   }
   .navbar-custom.is-fixed .nav li a {
     color: #333333;
   }
   .navbar-custom.is-fixed .nav li a:hover,
   .navbar-custom.is-fixed .nav li a:focus {
-    color: #0085A1;
+    color: #880716;
   }
   .navbar-custom.is-visible {
     /* if the user changes the scrolling direction, we show the header */
@@ -232,7 +234,7 @@ hr.small {
 .post-preview > a:hover,
 .post-preview > a:focus {
   text-decoration: none;
-  color: #0085A1;
+  color: #880716;
 }
 .post-preview > a > .post-title {
   font-size: 30px;
@@ -269,7 +271,7 @@ hr.small {
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
-  color: #0085A1;
+  color: #880716;
   text-decoration: underline;
 }
 @media only screen and (min-width: 768px) {
@@ -358,7 +360,7 @@ form .row:first-child .floating-label-form-group {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 50 ;
   letter-spacing: 1px;
   border-radius: 0;
   padding: 5px 5px;
@@ -369,8 +371,8 @@ form .row:first-child .floating-label-form-group {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #0085A1;
-  border: 1px solid #0085A1;
+  background-color: #880716;
+  border: 1px solid #880716;
   color: white;
 }
 .pager {
@@ -390,8 +392,8 @@ form .row:first-child .floating-label-form-group {
 .pager li > a:hover,
 .pager li > a:focus {
   color: white;
-  background-color: #0085A1;
-  border: 1px solid #0085A1;
+  background-color: #880716;
+  border: 1px solid #880716;
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,
@@ -404,7 +406,7 @@ form .row:first-child .floating-label-form-group {
 ::-moz-selection {
   color: white;
   text-shadow: none;
-  background: #0085A1;
+  background: #880716;
 }
 ::selection {
   color: white;
@@ -432,4 +434,19 @@ body {
   border-top-left-radius:3px;
   border-top-right-radius:3px;
 }
+
+.post-preview h2  {
+  text-align: center;
+}
+.post-preview .post-meta  {
+  text-align: center;
+}
+.post-preview a {
+  text-align: center;
+}
+.post-meta {
+  text-align: center;
+}
+
+
 

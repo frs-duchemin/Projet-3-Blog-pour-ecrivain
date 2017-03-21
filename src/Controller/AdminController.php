@@ -99,9 +99,9 @@ class AdminController
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
-            $app['session']->getFlashBag()->add('success', 'L\'comment a été mis à jour');
+            $app['session']->getFlashBag()->add('success', 'Le commentaire a été mis à jour');
         }
-        return $app['twig']->render('comment_form.html.twig', array(
+        return $app['twig']->render('comment_form_edit.html.twig', array(
             'title' => 'Editer un commentaire',
             'commentForm' => $commentForm->createView()));
     }

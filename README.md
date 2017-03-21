@@ -1,5 +1,8 @@
-# OC-MicroCMS
+# blog- Jean Forteroche
 
-Support du cours OpenClassrooms "Evoluer vers une architecture PHP professionnelle".
+Usage
 
-Itération 6 : intégration de Bootstrap.
+Importer dans PhpMyAdmin le fichier microcms.sql à partir du dossier db.
+Pour la gestion du back-office: 
+    Pseudonyme : Jean
+    Mdp : @dm1n

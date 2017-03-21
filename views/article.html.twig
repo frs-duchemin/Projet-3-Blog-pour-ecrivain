@@ -20,12 +20,14 @@
             {{ parent() }}
             <p>{{ article.content | raw}}</p>
             <h3>Commentaires</h3>
+
             <a class="btn btn-primary" href="{{ path('comment_add', { 'id': article.id }) }}">Ajouter un commentaire</a>
             <br>
             {% for comment in comments %}
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <p class="post-meta">
+
                             Le {{ comment.date|date("d/m/Y \\à\\ H:i:s") }}
                             <strong>{{ comment.author }}</strong> a commenté : {{ comment.content | raw }}
                             <a class="btn btn-warning pull-right" href="{{ path('comment_signal', { 'id': comment.id }) }}">Signaler le commentaire</a>
