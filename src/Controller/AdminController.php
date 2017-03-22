@@ -41,10 +41,12 @@ class AdminController
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
             $app['session']->getFlashBag()->add('success', 'L\'article a été ajouté');
+            return $app->redirect($app['url_generator']->generate('admin'));
         }
-        return $app['twig']->render('article_form.html.twig', array(
+         return $app['twig']->render('article_form.html.twig', array(
             'title' => 'New article',
             'articleForm' => $articleForm->createView()));
+
     }
 
     /**
@@ -62,10 +64,13 @@ class AdminController
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
             $app['session']->getFlashBag()->add('success', 'L\'article a été mis à jour');
+            return $app->redirect($app['url_generator']->generate('admin'));
         }
-        return $app['twig']->render('article_form.html.twig', array(
+
+        return $app['twig']->render('article_form_edit.html.twig', array(
             'title' => 'Editer un article',
             'articleForm' => $articleForm->createView()));
+
     }
 
     /**
@@ -100,6 +105,7 @@ class AdminController
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
             $app['session']->getFlashBag()->add('success', 'Le commentaire a été mis à jour');
+            return $app->redirect($app['url_generator']->generate('admin'));
         }
         return $app['twig']->render('comment_form_edit.html.twig', array(
             'title' => 'Editer un commentaire',

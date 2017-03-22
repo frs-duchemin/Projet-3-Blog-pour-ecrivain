@@ -364,6 +364,7 @@ form .row:first-child .floating-label-form-group {
   letter-spacing: 1px;
   border-radius: 0;
   padding: 5px 5px;
+  margin-right: 5px;
 }
 .btn-lg {
   font-size: 14px;
@@ -444,17 +445,19 @@ body {
 .post-preview a {
   text-align: center;
 }
-.post-meta {
-  text-align: center;
-}
+
 #errorPanel {
   padding-top: 100px;
   padding-bottom: 100px;
 }
-.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
-  padding: 8px;
-  line-height: 1.42857143;
-  vertical-align: center;}
+
+
+.btn btn-warning{
+  margin-left: 5px;
+}
+
+
+
 
 
 

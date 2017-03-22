@@ -1,8 +1,21 @@
-# blog- Jean Forteroche
+## Blog Jean-Forteroche
 
-Usage
+# Installation
 
-Importer dans PhpMyAdmin le fichier microcms.sql à partir du dossier db.
-Pour la gestion du back-office: 
-    Pseudonyme : Jean
-    Mdp : @dm1n
+* Créer un dossier dans le répertoire associé au serveur web local, 
+
+Exemples :
+
+    * c:\wamp\www avec WAMP pour Windows.
+
+    * /var/www ou /var/www/html sous Linux.
+
+    * /Applications/MAMP/htdocs avec MAMP pour Mac.
+
+* Installer composer dans ce répertoire avec la commande :
+
+    composer install
+
+## Enjoy !!
+
+

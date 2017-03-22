@@ -1,15 +1,11 @@
 <?php
-
 namespace MicroCMS\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use MicroCMS\Domain\Comment;
 use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Domain\CommentDAO;
-
-
 class HomeController {
-
     /**
      * Home page controller.
      *
@@ -19,7 +15,6 @@ class HomeController {
         $articles = $app['dao.article']->findAll();
         return $app['twig']->render('index.html.twig', array('articles' => $articles));
     }
-
     /**
      * Article details controller.
      *
@@ -45,19 +40,15 @@ class HomeController {
             'childrenCommentsLevel2' => $childrenCommentsLevel2,
         ));
     }
-
-
     public function addCommentAction(  $id, $parentId, Request $request, Application $app)
     {
         $article = $app['dao.article']->find($id);
         $comment = new Comment();
         $comment->setArticle($article);
-
         if ($parentId) {
             $parent = $app['dao.comment']->find($parentId);
             $comment->setParent($parent);
         }
-
         $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
@@ -67,10 +58,8 @@ class HomeController {
         }
         return $app['twig']->render('comment_form.html.twig', array(
             'commentForm' => $commentForm->createView()));
-
     }
-
-    // Signalement comentaire
+    // Signalement commentaire
     public function signalAction(  $id,  Application $app)
     {
         $comment = $app['dao.comment']->find($id);
@@ -78,7 +67,6 @@ class HomeController {
         $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
         return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
     }
-
     /**
      * User login controller.
      *
@@ -91,7 +79,6 @@ class HomeController {
             'last_username' => $app['session']->get('_security.last_username'),
         ));
     }
-
     /**
      * Home page controller.
      *
