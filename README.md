@@ -17,7 +17,7 @@ Exemples :
     composer install
     
 * Importer le fichier microcms.sql depuis le répertoire "db" dans PhpMyAdmin.
-* Modifier l'accès à la base dans le fichier prod.php situé dans le répertoire app/config.
+* Modifier l'accès à la base de données dans le fichier prod.php situé dans le répertoire app/config.
     
 * Identifiants pour l'espace d'administration :
     * Nom d'utilisateur : Jean
