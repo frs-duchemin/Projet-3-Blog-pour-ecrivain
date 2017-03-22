@@ -15,6 +15,10 @@ Exemples :
 * Installer composer dans ce répertoire avec la commande :
 
     composer install
+    
+* Identifiants pour l'espace d'administration :
+    * Nom d'utilisateur : Jean
+    * Mot de passe : @dm1n
 
 ## Enjoy !!
 
