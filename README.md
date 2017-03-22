@@ -2,7 +2,7 @@
 
 # Installation
 
-* Créer un dossier dans le répertoire associé au serveur web local, 
+* Créer un dossier dans le répertoire associé au serveur web local.
 
 Exemples :
 
@@ -15,6 +15,9 @@ Exemples :
 * Installer composer dans ce répertoire avec la commande :
 
     composer install
+    
+* Importer le fichier microcms.sql depuis le répertoire "db" dans PhpMyAdmin.
+* Modifier l'accès à la base dans le fichier prod.php situé dans le répertoire app/config.
     
 * Identifiants pour l'espace d'administration :
     * Nom d'utilisateur : Jean
