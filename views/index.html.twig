@@ -2,13 +2,7 @@
 {% extends "layout.html.twig" %}
 {% block title %}Accueil{% endblock %}
 {% block content %}
-    <script>$(function() {
-            $(selector).pagination({
-                items: 100,
-                itemsOnPage: 10,
-                cssStyle: 'light-theme'
-            });
-        });</script>
+
     <div class="container" xmlns="http://www.w3.org/1999/html">
 
     {% for article in articles %}
@@ -31,10 +25,12 @@
 
 
                     </p>
+
                 </div>
                 <hr>
             </div>
         </div>
+
     {% endfor %}
 
     </div>

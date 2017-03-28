@@ -4,10 +4,8 @@ namespace MicroCMS\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use MicroCMS\Domain\Article;
-use MicroCMS\Domain\User;
 use MicroCMS\Form\Type\ArticleType;
 use MicroCMS\Form\Type\CommentType;
-use MicroCMS\Form\Type\UserType;
 
 class AdminController
 {
