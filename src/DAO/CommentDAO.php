@@ -98,6 +98,12 @@ class CommentDAO extends DAO
         $this->save($comment);
     }
 
+    public function modifSignal($comment)
+    {
+        $comment->setSignal(NULL);
+        $this->save($comment);
+    }
+
     public function findAllBySignal(){
         $sql = "select * from t_comment order by signale desc, com_id desc";
         $result = $this->getDb()->fetchAll($sql, array());
@@ -175,15 +181,15 @@ class CommentDAO extends DAO
         $comment->setAuthor($row['com_author']);
         $comment->setContent($row['com_content']);
         $comment->setDate($row['com_date']);
-
-
         $comment->setSignal($row['signale']);
+
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['art_id'];
             $article = $this->articleDAO->find($articleId);
             $comment->setArticle($article);
         }
+
         if (array_key_exists('parent_id', $row) && $row['parent_id']) {
             // Find and set the associated article
             $parentId = $row['parent_id'];

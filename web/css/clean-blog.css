@@ -365,6 +365,7 @@ form .row:first-child .floating-label-form-group {
   border-radius: 0;
   padding: 5px 5px;
   margin-right: 5px;
+  margin-bottom: 10px;
 }
 .btn-lg {
   font-size: 14px;
@@ -455,6 +456,7 @@ body {
 .btn btn-warning{
   margin-left: 5px;
 }
+
 
 
 

@@ -20,8 +20,8 @@
         {{ form_start(commentForm, { 'attr': {'class': 'form-horizontal'} }) }}
         <div class="form-group">
             <div class="col-sm-4">
-                {{ form_errors(commentForm.author) }}
-                {{ form_widget(commentForm.author, { 'attr':  {
+                {{ form_errors(commentForm.author|e) }}
+                {{ form_widget(commentForm.author|e, { 'attr':  {
                     'class': 'form-control',
                     'placeholder': 'Votre pseudo'
                 }}) }}
@@ -29,8 +29,8 @@
         </div>
         <div class="form-group">
             <div class="col-sm-6">
-                {{ form_errors(commentForm.content) }}
-                {{ form_widget(commentForm.content, { 'attr':  {
+                {{ form_errors(commentForm.content|e) }}
+                {{ form_widget(commentForm.content|e, { 'attr':  {
                     'class': 'form-control',
                     'rows': '4',
                     'placeholder': 'Votre commentaire'
@@ -40,7 +40,7 @@
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-3">
                 <a href="{{ path('home') }}" class="btn btn-danger">Annuler</a>
-                <input type="submit" class="btn btn-success" value="Enregistrer" formnovalidate="true" />
+                <input type="submit" class="btn btn-success" value="Enregistrer" />
             </div>
         </div>
         {{ form_end(commentForm) }}

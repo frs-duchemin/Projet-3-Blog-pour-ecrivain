@@ -19,7 +19,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
 
-// Register error handler
+
 
 $app->register(new Silex\Provider\AssetServiceProvider(), array(
     'assets.version' => 'v1'

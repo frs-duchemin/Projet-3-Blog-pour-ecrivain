@@ -67,6 +67,7 @@ class HomeController {
         $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
         return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
     }
+
     /**
      * User login controller.
      *

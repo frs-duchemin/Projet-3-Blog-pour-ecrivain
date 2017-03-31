@@ -110,6 +110,8 @@ class AdminController
             'commentForm' => $commentForm->createView()));
     }
 
+
+
     /**
      * Delete comment controller.
      *
@@ -124,6 +126,22 @@ class AdminController
         $app['session']->getFlashBag()->add('success', 'Le commentaire et ses enfants ont été supprimés.');
         // Redirection page d'accueil administration
         return $app->redirect($app['url_generator']->generate('admin'));
+
+
+
+        // Supprimer les commentaires associés (enfants)
+        $app['dao.comment']->deleteAllChildrens($id);
+        $app['session']->getFlashBag()->add('success', 'Le commentaire et ses enfants ont été supprimés.');
+        // Redirection page d'accueil administration
+        return $app->redirect($app['url_generator']->generate('admin'));
     }
 
+    //Modification signalement
+    public function modifCommentAction($id, Request $request, Application $app)
+    {
+        $comment = $app['dao.comment']->find($id);
+        $app['dao.comment']->modifSignal($comment);
+        $app['session']->getFlashBag()->add('success', 'Le commentaire est affiché comme non signalé .');
+        return $app->redirect($app['url_generator']->generate('admin'));
+    }
 }

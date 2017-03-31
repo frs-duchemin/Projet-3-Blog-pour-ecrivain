@@ -6,6 +6,10 @@
 $app->get('/',"MicroCMS\Controller\HomeController::indexAction")
 
     ->bind('home');
+// Test page
+$app->match('/index/{id}',"MicroCMS\Controller\HomeController::articleAction")
+
+    ->bind('index');
 
 // Détails article avec les commentaires
 $app->match('/article/{id}', "MicroCMS\Controller\HomeController::articleAction")
@@ -20,9 +24,7 @@ $app->match('/article/{id}/comment/add/{parentId}', "MicroCMS\Controller\HomeCon
 $app->match('/comment/{id}/signal', "MicroCMS\Controller\HomeController::signalAction")
     ->bind('comment_signal');
 
-// Page de login
-$app->get('/login', "MicroCMS\Controller\HomeController::loginAction")
-    ->bind('login');
+
 
 // Page about
 $app->get('/about', "MicroCMS\Controller\HomeController::aboutAction")
@@ -45,6 +47,9 @@ $app->match('/admin/article/{id}/edit', "MicroCMS\Controller\AdminController::ed
 $app->get('/admin/article/{id}/delete', "MicroCMS\Controller\AdminController::deleteArticleAction")
     ->bind('admin_article_delete');
 
+$app->match('/admin/comment/{id}/modif', "MicroCMS\Controller\AdminController::modifCommentAction")
+    ->bind('admin_comment_modif');
+
 // Editer un commentaire
 $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::editCommentAction")
     ->bind('admin_comment_edit');
@@ -52,5 +57,6 @@ $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::ed
 // Supprimer un commentaire
 $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::deleteCommentAction")
     ->bind('admin_comment_delete');
+
 
 
