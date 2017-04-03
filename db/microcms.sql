@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 21 Mars 2017 à 15:44
+-- Généré le :  Lun 03 Avril 2017 à 13:19
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -18,11 +18,12 @@ SET time_zone = "+00:00";
 
 --
 -- Base de données :  `microcms`
---
 create database if not exists microcms character set utf8 collate utf8_unicode_ci;
 use microcms;
 
 grant all privileges on microcms.* to 'microcms_user'@'localhost' identified by 'secret';
+--
+
 -- --------------------------------------------------------
 
 --
@@ -45,7 +46,7 @@ INSERT INTO `t_article` (`art_id`, `art_title`, `art_content`, `art_date`) VALUE
 (2, 'Deuxième article', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut hendrerit mauris ac porttitor accumsan. Nunc vitae pulvinar odio, auctor interdum dolor. Aenean sodales dui quis metus iaculis, hendrerit vulputate lorem vestibulum. Suspendisse pulvinar, purus at euismod semper, nulla orci pulvinar massa, ac placerat nisi urna eu tellus. Fusce dapibus rutrum diam et dictum. Sed tellus ipsum, ullamcorper at consectetur vitae, gravida vel sem. Vestibulum pellentesque tortor et elit posuere vulputate. Sed et volutpat nunc. Praesent nec accumsan nisi, in hendrerit nibh. In ipsum mi, fermentum et eleifend eget, eleifend vitae libero. Phasellus in magna tempor diam consequat posuere eu eget urna. Fusce varius nulla dolor, vel semper dui accumsan vitae. Sed eget risus neque.', '2017-03-10 10:40:12'),
 (3, 'Troisième article', 'J’en dis autant de ceux qui, par mollesse d’esprit, c’est-à-dire par la crainte de la peine et de la douleur, manquent aux devoirs de la vie. Et il est très facile de rendre raison de ce que j’avance. Car, lorsque nous sommes tout à fait libres, et que rien ne nous empêche de faire ce qui peut nous donner le plus de plaisir, nous pouvons nous livrer entièrement à la volupté et chasser toute sorte de douleur ; mais, dans les temps destinés aux devoirs de la société ou à la nécessité des affaires, souvent il faut faire divorce avec la volupté, et ne se point refuser à la peine. La règle que suit en cela un homme sage, c’est de renoncer à de légères voluptés pour en avoir de plus grandes, et de savoir supporter des douleurs légères pour en éviter de plus fâcheuses.', '2017-03-10 10:40:12'),
 (4, 'Quatrième article', 'Integer elementum massa at nulla placerat varius. Suspendisse in libero risus, in interdum massa. Vestibulum ac leo vitae metus faucibus gravida ac in neque. Nullam est eros, suscipit sed dictum quis, accumsan a ligula. In sit amet justo lectus. Etiam feugiat dolor ac elit suscipit in elementum orci fringilla. Aliquam in felis eros. Praesent hendrerit lectus sit amet turpis tempus hendrerit. Donec laoreet volutpat molestie. Praesent tempus dictum nibh ac ullamcorper. Sed eu consequat nisi. Quisque ligula metus, tristique eget euismod at, ullamcorper et nibh. Duis ultricies quam egestas nibh mollis in ultrices turpis pharetra. Vivamus et volutpat mi. Donec nec est eget dolor laoreet iaculis a sit amet diam. \r\n', '2017-03-10 10:40:12'),
-(6, 'Cinquième article', 'Maecenas eu placerat ante. Fusce ut neque justo, et aliquet enim. In hac habitasse platea dictumst. Nullam commodo neque erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis. \r\n', '2017-03-10 10:40:12');
+(6, 'Cinquième article', '<p>Maecenas eu</p>\r\n<p>&nbsp;</p>\r\n<p>placerat ante.</p>\r\n<p>&nbsp;</p>\r\n<p>Fusce ut neque justo, et aliquet enim. In hac habitasse platea dictumst. Nullam commodo neque erat, vitae facilisis erat. Cras at mauris ut tortor vestibulum fringilla vel sed metus. Donec interdum purus a justo feugiat rutrum. Sed ac neque ut neque dictum accumsan. Cras lacinia rutrum risus, id viverra metus dictum sit amet. Fusce venenatis, urna eget cursus placerat, dui nisl fringilla purus, nec tincidunt sapien justo ut nisl. Curabitur lobortis semper neque et varius. Etiam eget lectus risus, a varius orci. Nam placerat mauris at dolor imperdiet at aliquet lectus ultricies. Duis tincidunt mi at quam condimentum lobortis.</p>', '2017-03-10 10:40:12');
 
 -- --------------------------------------------------------
 
@@ -62,16 +63,6 @@ CREATE TABLE `t_comment` (
   `parent_id` int(11) DEFAULT NULL,
   `signale` tinyint(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `t_comment`
---
-
-INSERT INTO `t_comment` (`com_id`, `com_author`, `com_content`, `com_date`, `art_id`, `parent_id`, `signale`) VALUES
-(73, 'numero 1', '<p>Commentaire num&eacute;ro 1</p>', '2017-03-21 12:54:04', 1, NULL, NULL),
-(74, 'numero 1-1', '<p>reponse au commentaire 1</p>', '2017-03-21 12:54:26', 1, 73, NULL),
-(75, 'numero 1-2', '<p>reponse au commentaire 1-1</p>', '2017-03-21 12:54:52', 1, 74, NULL),
-(76, 'commentaire 2', '<p>commentaire 2</p>', '2017-03-21 12:55:26', 1, 73, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,7 +83,7 @@ CREATE TABLE `t_user` (
 --
 
 INSERT INTO `t_user` (`usr_id`, `usr_name`, `usr_password`, `usr_salt`, `usr_role`) VALUES
-(1, 'Jean', '$2y$13$A8MQM2ZNOi99EW.ML7srhOJsCaybSbexAj/0yXrJs4gQ/2BqMMW2K', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
+(1, 'Jean', '$2y$13$mwOcyXW4N890V2VYQU8QWeZuys87.T33EDlWCYEGZQWKYBri1kHu6', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
 
 --
 -- Index pour les tables exportées
@@ -125,12 +116,12 @@ ALTER TABLE `t_user`
 -- AUTO_INCREMENT pour la table `t_article`
 --
 ALTER TABLE `t_article`
-  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT pour la table `t_comment`
 --
 ALTER TABLE `t_comment`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --

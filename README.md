@@ -21,7 +21,7 @@ Exemples :
     
 * Identifiants pour l'espace d'administration :
     * Nom d'utilisateur : Jean
-    * Mot de passe : @dm1n
+    * Mot de passe : @l@sk@
 
 ## Enjoy !!
 
