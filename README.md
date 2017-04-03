@@ -12,7 +12,7 @@ Exemples :
 
     * /Applications/MAMP/htdocs avec MAMP pour Mac.
 
-* Installer composer dans ce répertoire avec la commande :
+* Installer les dépendances avec composer dans ce répertoire avec la commande :
 
     composer install
     
