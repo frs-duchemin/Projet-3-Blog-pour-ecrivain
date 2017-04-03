@@ -1,15 +1,11 @@
 <?php
 
-////////////////////////////////HOME///////////////////////////////
+                    ////////////////////////////////HOME///////////////////////////////
 
 // Page d'accueil
 $app->get('/',"MicroCMS\Controller\HomeController::indexAction")
 
     ->bind('home');
-// Test page
-$app->match('/index/{id}',"MicroCMS\Controller\HomeController::articleAction")
-
-    ->bind('index');
 
 // Formulaire Login
 $app->get('/login', "MicroCMS\Controller\HomeController::loginAction")
@@ -28,12 +24,11 @@ $app->match('/article/{id}/comment/add/{parentId}', "MicroCMS\Controller\HomeCon
 $app->match('/comment/{id}/signal', "MicroCMS\Controller\HomeController::signalAction")
     ->bind('comment_signal');
 
-
-
 // Page about
 $app->get('/about', "MicroCMS\Controller\HomeController::aboutAction")
     ->bind('about');
-////////////////////////////ADMIN///////////////////////////////////
+
+                        ////////////////////////////ADMIN///////////////////////////////////
 
 // Page accueil administration
 $app->get('/admin', "MicroCMS\Controller\AdminController::indexAction")
