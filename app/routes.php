@@ -2,7 +2,7 @@
 
 ////////////////////////////////HOME///////////////////////////////
 
-// Home page
+// Page d'accueil
 $app->get('/',"MicroCMS\Controller\HomeController::indexAction")
 
     ->bind('home');
@@ -10,6 +10,10 @@ $app->get('/',"MicroCMS\Controller\HomeController::indexAction")
 $app->match('/index/{id}',"MicroCMS\Controller\HomeController::articleAction")
 
     ->bind('index');
+
+// Formulaire Login
+$app->get('/login', "MicroCMS\Controller\HomeController::loginAction")
+    ->bind('login');
 
 // Détails article avec les commentaires
 $app->match('/article/{id}', "MicroCMS\Controller\HomeController::articleAction")
@@ -47,6 +51,7 @@ $app->match('/admin/article/{id}/edit', "MicroCMS\Controller\AdminController::ed
 $app->get('/admin/article/{id}/delete', "MicroCMS\Controller\AdminController::deleteArticleAction")
     ->bind('admin_article_delete');
 
+// Modifier signalement
 $app->match('/admin/comment/{id}/modif', "MicroCMS\Controller\AdminController::modifCommentAction")
     ->bind('admin_comment_modif');
 
@@ -57,6 +62,19 @@ $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::ed
 // Supprimer un commentaire
 $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::deleteCommentAction")
     ->bind('admin_comment_delete');
+
+// Editer administrateur
+$app->match('/admin/user/{id}/edit', "MicroCMS\Controller\AdminController::editUserAction")
+    ->bind('admin_user_edit');
+// Add a user
+$app->match('/admin/user/add', "MicroCMS\Controller\AdminController::addUserAction")
+    ->bind('admin_user_add');
+
+
+// Remove a user
+$app->get('/admin/user/{id}/delete', "MicroCMS\Controller\AdminController::deleteUserAction")
+    ->bind('admin_user_delete');
+
 
 
 

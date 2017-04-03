@@ -11,9 +11,7 @@
         "symfony/form": "~2.8|3.0.*",
         "symfony/translation": "~2.8|3.0.*",
         "symfony/config": "~2.8|3.0.*",
-        "symfony/var-dumper": "^3.2",
-        "knplabs/knp-paginator-bundle": "^2.5",
-        "kosinix/paginator": "dev-master"
+        "symfony/var-dumper": "^3.2"
     },
     "autoload": {
         "psr-4": {"MicroCMS\\": "src"}

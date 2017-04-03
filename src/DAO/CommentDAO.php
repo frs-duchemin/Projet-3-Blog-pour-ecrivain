@@ -15,13 +15,7 @@ class CommentDAO extends DAO
         $this->articleDAO = $articleDAO;
     }
 
-    /**
-     * Returns an article matching the supplied id.
-     *
-     * @param integer $id
-     *
-     * @return \MicroCMS\Domain\Article|throws an exception if no matching article is found
-     */
+   // Trouve un commentaire associé à un article
     public function find($id)
     {
         $sql = "select * from t_comment where com_id=?";
@@ -32,23 +26,13 @@ class CommentDAO extends DAO
             throw new \Exception("No comment matching id " . $id);
     }
 
-    /**
-     * Removes a comment from the database.
-     *
-     * @param @param integer $id The comment id
-     */
+   // Supprime le commentaire de la BDD
     public function delete($id) {
         // Delete the comment
         $this->getDb()->delete('t_comment', array('com_id' => $id));
     }
 
-    /**
-     * Return a list of all comments for an article, sorted by date (most recent last).
-     *
-     * @param integer commentId The article id.
-     *
-     * @return array A list of all comments for the article.
-     */
+    // Trouve tous les commentaires associés à un article
     public function findAllByArticle($articleId) {
         $sql = "select com_id, com_author, com_content, com_date from t_comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
@@ -63,6 +47,7 @@ class CommentDAO extends DAO
         return $comments;
     }
 
+    // Trouve tous les commentaires parents associés à un article
     public function findAllParentByArticle($articleId) {
         $sql = "select * from t_comment where art_id=? and parent_id is NULL order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
@@ -76,7 +61,7 @@ class CommentDAO extends DAO
         }
         return $comments;
     }
-
+// Trouve tous les commentaires enfants associés à un commentaire parent
     public function findAllChildren($comment) {
         $sql = "select * from t_comment where parent_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($comment->getId()));
@@ -85,25 +70,25 @@ class CommentDAO extends DAO
         foreach ($result as $row) {
             $comId = $row['com_id'];
             $childrenComment = $this->buildDomainObject($row);
-            // The associated article is defined for the constructed comment
-            // $comment->setArticle($article);
+
             $childrenComments[$comId] = $childrenComment;
         }
         return $childrenComments;
     }
 
+    // Signalement commentaire
     public function addSignal($comment)
     {
         $comment->setSignal(true);
         $this->save($comment);
     }
-
+    //Modification signalement commentaire
     public function modifSignal($comment)
     {
-        $comment->setSignal(NULL);
+        $comment->setSignal(null);
         $this->save($comment);
     }
-
+    // Trouve tous les commentaires signalés
     public function findAllBySignal(){
         $sql = "select * from t_comment order by signale desc, com_id desc";
         $result = $this->getDb()->fetchAll($sql, array());
@@ -119,35 +104,17 @@ class CommentDAO extends DAO
         return $comments;
     }
 
-    /**
-     * Removes all comments for an article
-     *
-     * @param $articleId The id of the article
-     */
+   // Supprime tous les commentaires d'un article
     public function deleteAllByArticle($articleId) {
         $this->getDb()->delete('t_comment', array('art_id' => $articleId));
     }
 
-    /**
-     * Removes all childrens for a comment
-     *
-     * @param $commentId The id of the article
-     */
+    // Supprime tous les commentaires enfants associés à un commentaire parent
     public function deleteAllChildrens($parentId) {
         $this->getDb()->delete('t_comment', array('parent_id' => $parentId));
     }
 
-    /**
-     * Creates an Comment object based on a DB row.
-     *
-     * @param array $row The DB row containing Comment data.
-     * @return \MicroCMS\Domain\Comment
-     */
-    /**
-     * Saves an comment into the database.
-     *
-     * @param \MicroCMS\Domain\Comment $comment The comment to save
-     */
+  // Enregistre le commentaire dans la BDD
     public function save(Comment $comment) {
         if ($comment->getParent()){
             $parent = $comment->getParent()->getId();
@@ -174,7 +141,12 @@ class CommentDAO extends DAO
             $comment->setId($id);
         }
     }
-
+    /**
+     * Creates an Comment object based on a DB row.
+     *
+     * @param array $row The DB row containing Comment data.
+     * @return \MicroCMS\Domain\Comment
+     */
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['com_id']);

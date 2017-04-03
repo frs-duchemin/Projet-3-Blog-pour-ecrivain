@@ -1,17 +1,21 @@
 <!doctype html>
 <html>
+{% block head %}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset ('/css/clean-blog.css') }}" rel="stylesheet">
-    <link href="{{ asset ('/css/simplePagination.css') }}" rel="stylesheet">
+    <link href="{{ asset ('/css/clean-blog.css') }}" rel="stylesheet">
+
     <link href="{{  asset ('/lib/font-awesome/css/font-awesome.min.css ') }}" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <title>Blog - {% block title %}{% endblock %}</title>
 </head>
+{% endblock %}
+
 <body>
 
 {% block navbar %}
@@ -81,13 +85,7 @@
             {% endfor %}
         {% endblock %}
     </div>
-<ul class="nav pull-right scroll-top">
-    <li>
-        <a href="#" title="Scroll to top">
-            <i class="glyphicon glyphicon-chevron-up"></i>
-        </a>
-    </li>
-</ul>
+
 
 {% block footer %}
     <footer>
@@ -102,17 +100,13 @@
 {% endblock %}
 
 {% block javascript %}
+
     <!-- jQuery -->
     <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/clean-blog.js') }}"></script>
-    <!-- Tinymce -->
-
-
     <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
-    <script src="{{ asset('/js/jquery.simplePagination.js') }}"></script>
-
 
 {% endblock %}
 

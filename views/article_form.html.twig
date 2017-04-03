@@ -2,7 +2,7 @@
 {% set adminMenu = true %}
 {% block title %}{{ title }}{% endblock %}
 {% block header %}
-    <header class="intro-header" style="background-image: url('{{ asset('images/ecrire.jpg') }}')">
+    <header class="intro-header" style="background-image: url('{{ asset('images/ecrire_lt.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -27,46 +27,49 @@
         <div class="form-group">
 
             <div class="col-sm-6">
-                {{ form_errors(articleForm.title) }}
                 {{ form_widget(articleForm.title, { 'attr':  {
                     'class': 'form-control',
                     'placeholder': 'Titre de l\'article'
                 }}) }}
+                {% if form_errors(articleForm.content) %}
+                <h5 class="text-danger"><i class="fa fa-warning fa-spin" aria-hidden="true"></i> {{ form_errors(articleForm.title) }}</h5>
+                {% endif %}
+
             </div>
         </div>
         <div class="form-group">
 
             <div class="col-sm-6">
-                {{ form_errors(articleForm.content) }}
                 {{ form_widget(articleForm.content, { 'attr':  {
                     'class': 'form-control',
                     'rows': '8',
                     'placeholder': 'Contenu de l\'article'
                 }}) }}
+
+                {% if form_errors(articleForm.content) %}
+                <h5 class="text-danger"><i class="fa fa-warning fa-spin" aria-hidden="true"></i> {{ form_errors(articleForm.content) }}</h5>
+                {% endif %}
+
             </div>
         </div>
         <div class="form-group">
 
             <div class="col-sm-offset-4 col-sm-3">
                 <a href="{{ path('admin') }}" class="btn btn-danger">Annuler</a>
-                <input type="submit" class="btn btn-success" value="Enregistrer"  />
+                <input type="submit" class="btn btn-success" value="Enregistrer"   />
             </div>
         </div>
         {{ form_end(articleForm) }}
     </div>
 {% endblock %}
+
 {% block javascript %}
-    <!-- jQuery -->
-    <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
-    <!-- JavaScript Boostrap plugin -->
-    <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/clean-blog.js') }}"></script>
-    <!-- Tinymce -->
+    {{ parent() }}
+
+        <!-- Tinymce -->
     <script src="{{ asset('/js/tinymce/jquery.tinymce.min.js') }}"></script>
     <script src="{{ asset('/js/tinymce/tinymce.min.js') }}"></script>
     <script>tinymce.init({ selector:'textarea', language:'fr_FR'});</script>
-
-
     <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.js"></script>
 
 {% endblock %}

@@ -3,13 +3,9 @@ namespace MicroCMS\DAO;
 use MicroCMS\Domain\Article;
 class ArticleDAO extends DAO
 {
-    /**
-     * Return a list of all articles, sorted by date (most recent first).
-     *
-     * @return array A list of all articles.
-     */
+    // Liste tous les articles
     public function findAll() {
-        $sql = "select  * from t_article order by art_id desc";
+        $sql = "select  * from t_article order by art_id desc ";
         $result = $this->getDb()->fetchAll($sql);
         // Convert query result to an array of domain objects
         $articles = array();
@@ -20,13 +16,7 @@ class ArticleDAO extends DAO
         return $articles;
     }
 
-    /**
-     * Returns an article matching the supplied id.
-     *
-     * @param integer $id The article id.
-     *
-     * @return \MicroCMS\Domain\Article|throws an exception if no matching article is found
-     */
+    // Liste un article en fonction de son ID
     public function find($id) {
         $sql = "select * from t_article where art_id=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
@@ -36,19 +26,12 @@ class ArticleDAO extends DAO
             throw new \Exception("No article matching id " . $id);
     }
 
-    /**
-     * Saves an article into the database.
-     *
-     * @param \MicroCMS\Domain\Article $article The article to save
-     */
+    // Enregistre article dans la BDD
     public function save(Article $article) {
         $articleData = array(
             'art_title' => $article->getTitle(),
             'art_content' => $article->getContent(),
-
-
         );
-
         if ($article->getId()) {
             // The article has already been saved : update it
             $this->getDb()->update('t_article', $articleData, array('art_id' => $article->getId()));
@@ -61,11 +44,7 @@ class ArticleDAO extends DAO
         }
     }
 
-    /**
-     * Removes an article from the database.
-     *
-     * @param integer $id The article id.
-     */
+    // Supprime un article de la BDD
     public function delete($id) {
         // Delete the article
         $this->getDb()->delete('t_article', array('art_id' => $id));

@@ -1,0 +1,34 @@
+
+{% extends "layout.html.twig" %}
+{% block title %}Accueil{% endblock %}
+{% block content %}
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+
+    {% for article in articles %}
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+
+                        <h2 class="post-title" >
+                            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+                        </h2>
+                        <p class="post-subtitle">
+                    {{ article.content |  truncate(180) | striptags| raw  }}
+                        </p>
+                    <a class="post-meta"   href="{{ path('article', { 'id': article.id }) }}" >[Lire la suite...]</a>
+
+                    <p class="post-meta">Publié par <a href="{{ path('about') }}">Jean-Forteroche</a>
+                        Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
+                    </p>
+
+                </div>
+                <hr>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+{% endblock %}

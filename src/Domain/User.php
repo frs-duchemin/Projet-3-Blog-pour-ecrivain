@@ -34,6 +34,7 @@ class User implements UserInterface
      * @var string
      */
     private $role;
+
     public function getId() {
         return $this->id;
     }

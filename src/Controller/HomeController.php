@@ -5,23 +5,18 @@ use Symfony\Component\HttpFoundation\Request;
 use MicroCMS\Domain\Comment;
 use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Domain\CommentDAO;
+use MicroCMS\Domain\User;
+
+
 class HomeController {
-    /**
-     * Home page controller.
-     *
-     * @param Application $app Silex application
-     */
+
+    // Page d'accueil
     public function indexAction(Application $app) {
         $articles = $app['dao.article']->findAll();
         return $app['twig']->render('index.html.twig', array('articles' => $articles));
     }
-    /**
-     * Article details controller.
-     *
-     * @param integer $id Article id
-     * @param Request $request Incoming request
-     * @param Application $app Silex application
-     */
+
+   // Détail article avec commentaires
     public function articleAction($id, Request $request, Application $app) {
         $article = $app['dao.article']->find($id);
         $comments = $app['dao.comment']->findAllParentByArticle($id);
@@ -40,6 +35,8 @@ class HomeController {
             'childrenCommentsLevel2' => $childrenCommentsLevel2,
         ));
     }
+
+    // Ajouter un commentaire et commentaires enfants
     public function addCommentAction(  $id, $parentId, Request $request, Application $app)
     {
         $article = $app['dao.article']->find($id);
@@ -59,6 +56,7 @@ class HomeController {
         return $app['twig']->render('comment_form.html.twig', array(
             'commentForm' => $commentForm->createView()));
     }
+
     // Signalement commentaire
     public function signalAction(  $id,  Application $app)
     {
@@ -68,23 +66,15 @@ class HomeController {
         return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
     }
 
-    /**
-     * User login controller.
-     *
-     * @param Request $request Incoming request
-     * @param Application $app Silex application
-     */
+    // Page de Login
     public function loginAction(Request $request, Application $app) {
         return $app['twig']->render('login.html.twig', array(
             'error'         => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
         ));
     }
-    /**
-     * Home page controller.
-     *
-     * @param Application $app Silex application
-     */
+
+    // Page à propos
     public function aboutAction(Application $app) {
         return $app['twig']->render('about.html.twig');
     }

@@ -1,34 +1,47 @@
-
 {% extends "layout.html.twig" %}
+{% block head %}
+    {{ parent() }}
+    <link href="{{ asset ('/css/loadmore.css') }}" rel="stylesheet">
+{% endblock %}
 {% block title %}Accueil{% endblock %}
+
 {% block content %}
 
-    <div class="container" xmlns="http://www.w3.org/1999/html">
+{% for article in articles %}
 
-    {% for article in articles %}
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
+<div class="row2">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-preview">
 
-                        <h2 class="post-title" >
-                            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
-                        </h2>
-                        <p class="post-subtitle">
-                    {{ article.content | truncate(150) | raw }}
-                        </p>
-                    <a class="post-meta"   href="{{ path('article', { 'id': article.id }) }}" >[Lire la suite...]</a>
+            <h2 class="post-title" >
+                <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
+            </h2>
+            <p class="post-subtitle">
+                {{ article.content |  truncate(180) | striptags| raw  }}
+            </p>
+            <a class="post-meta"   href="{{ path('article', { 'id': article.id }) }}" >[Lire la suite...]</a>
 
-                    <p class="post-meta">Publié par <a href="{{ path('about') }}">Jean-Forteroche</a>
-                        Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
-                    </p>
+            <p class="post-meta">Publié par <a href="{{ path('about') }}">Jean-Forteroche</a>
+                Le {{ article.date|date("d/m/Y \\à\\ H:i:s") }}
+            </p>
 
-                </div>
-                <hr>
-            </div>
         </div>
-
-    {% endfor %}
-
+        <hr>
     </div>
+</div>
+{% endfor %}
+
+
+<a href="#"  id="loadMore">Afficher plus d'articles</a>
+    <p class="totop">
+        <a href="#top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+    </p>
 
 {% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('/js/loadmore.js') }}"></script>
+
+
+{% endblock %}
+
