@@ -15,7 +15,7 @@ class CommentType extends AbstractType
             ->add('author', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prénom'
+                    'placeholder' => 'Auteur'
                 ],
                 'constraints' => [
                     new Length([
@@ -32,7 +32,7 @@ class CommentType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prénom'
+                    'placeholder' => 'Contenu'
                 ],
                 'constraints' => [
                     new Length([

@@ -26,7 +26,7 @@
                     'placeholder': 'Votre pseudo'
                 }}) }}
                 {% if form_errors(commentForm.content) %}
-                    <h5 class="text-danger"><i class="fa fa-warning fa-spin" aria-hidden="true"></i> {{ form_errors(commentForm.author|e) }}</h5>
+                    <h5 class="text-danger"><i class="fa fa-warning " aria-hidden="true"></i> {{ form_errors(commentForm.author|e) }}</h5>
                 {% endif %}
             </div>
         </div>
@@ -39,16 +39,22 @@
                     'placeholder': 'Votre commentaire'
                 }}) }}
                 {% if form_errors(commentForm.content) %}
-                    <h5 class="text-danger"><i class="fa fa-warning fa-spin" aria-hidden="true"></i> {{ form_errors(commentForm.content|e) }}</h5>
+                    <h5 class="text-danger"><i class="fa fa-warning " aria-hidden="true"></i> {{ form_errors(commentForm.content|e) }}</h5>
                 {% endif %}
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-3">
-                <a href="{{ path('admin') }}" class="btn btn-danger">Annuler</a>
-                <input type="submit" class="btn btn-success" value="Enregistrer" formnovalidate="true" />
+
+
+
+
+                <a href="{{ path('admin') }}#comments" class="btn btn-danger">Annuler</a>
+                <input type="submit" class="btn btn-success" value="Enregistrer"  />
             </div>
         </div>
+
+
         {{ form_end(commentForm) }}
     </div>
 {% endblock %}

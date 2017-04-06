@@ -64,17 +64,3 @@ $app['dao.comment'] = function ($app) {
 
     return $commentDAO;
 };
-// Register error handler
-$app->error(function (\Exception $e, Request $request, $code) use ($app) {
-    switch ($code) {
-        case 403:
-            $message = 'Access denied.';
-            break;
-        case 404:
-            $message = 'The requested resource could not be found.';
-            break;
-        default:
-            $message = "Something went wrong.";
-    }
-    return $app['twig']->render('error.html.twig', array('message' => $message));
-});

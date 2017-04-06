@@ -54,6 +54,7 @@ class HomeController {
             return $app->redirect($app['url_generator']->generate('article', ['id'=>$id]));
         }
         return $app['twig']->render('comment_form.html.twig', array(
+            'article' => $article,
             'commentForm' => $commentForm->createView()));
     }
 

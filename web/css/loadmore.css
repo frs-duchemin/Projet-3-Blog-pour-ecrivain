@@ -11,6 +11,7 @@
 }
 div.display {
     display: inline-block;
+    width: 100%;
 }
 .totop {
     position: fixed;

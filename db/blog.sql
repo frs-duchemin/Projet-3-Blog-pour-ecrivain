@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 03 Avril 2017 à 13:19
+-- Généré le :  Jeu 06 Avril 2017 à 13:47
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -17,12 +17,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `microcms`
-create database if not exists microcms character set utf8 collate utf8_unicode_ci;
-use microcms;
+-- Base de données :  `blog`
 
-grant all privileges on microcms.* to 'microcms_user'@'localhost' identified by 'secret';
---
+create database if not exists blog character set utf8 collate utf8_unicode_ci;
+use blog;
+grant all privileges on blog.* to 'root'@'localhost' identified by '';
+
 
 -- --------------------------------------------------------
 
@@ -64,6 +64,15 @@ CREATE TABLE `t_comment` (
   `signale` tinyint(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `t_comment`
+--
+
+INSERT INTO `t_comment` (`com_id`, `com_author`, `com_content`, `com_date`, `art_id`, `parent_id`, `signale`) VALUES
+(115, '<strong>Commentaire3</strong>', '<strong>\r\n\r\nCommentaire troisieme niveau\r\n\r\n</strong>', '2017-04-06 15:04:29', 6, 114, NULL),
+(114, '<strong>Commentaire2</strong>', '<strong>Commentaire deuxième niveau</strong>', '2017-04-06 15:04:00', 6, 113, NULL),
+(113, '<strong>Commentaire</strong>', '<strong>Commentaire premier niveau</strong>', '2017-04-06 15:03:33', 6, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -83,7 +92,7 @@ CREATE TABLE `t_user` (
 --
 
 INSERT INTO `t_user` (`usr_id`, `usr_name`, `usr_password`, `usr_salt`, `usr_role`) VALUES
-(1, 'Jean', '$2y$13$mwOcyXW4N890V2VYQU8QWeZuys87.T33EDlWCYEGZQWKYBri1kHu6', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
+(1, 'Jean', '$2y$13$9QH0/ufd.nEqm2tZrZMWvO.LpYFGYnwkLAye1H00Gm9NKw5RN/Tf2', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
 
 --
 -- Index pour les tables exportées
@@ -116,12 +125,12 @@ ALTER TABLE `t_user`
 -- AUTO_INCREMENT pour la table `t_article`
 --
 ALTER TABLE `t_article`
-  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `art_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `t_comment`
 --
 ALTER TABLE `t_comment`
-  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `com_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --
