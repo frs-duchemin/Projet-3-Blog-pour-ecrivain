@@ -46,14 +46,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/app.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="819">
-              <caret line="41" column="35" lean-forward="false" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="35" />
+            <state relative-caret-position="507">
+              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
               <folding>
                 <element signature="e#7#48#0#PHP" expanded="true" />
-                <element signature="e#643#691#0#PHP" expanded="false" />
+                <element signature="e#643#693#0#PHP" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -103,7 +103,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_form.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user_form.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/user_form.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-543">
@@ -657,12 +657,12 @@
       <workItem from="1491235829269" duration="13893000" />
       <workItem from="1491311939596" duration="2150000" />
       <workItem from="1491462017158" duration="17311000" />
-      <workItem from="1491511363941" duration="248000" />
+      <workItem from="1491511363941" duration="651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="386664000" />
+    <option name="totallyTimeSpent" value="387067000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1045,17 +1045,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="819">
-          <caret line="41" column="35" lean-forward="false" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="35" />
-          <folding>
-            <element signature="e#7#48#0#PHP" expanded="true" />
-            <element signature="e#643#691#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1197">
@@ -1095,6 +1084,17 @@
         <state relative-caret-position="-543">
           <caret line="19" column="76" lean-forward="true" selection-start-line="19" selection-start-column="76" selection-end-line="19" selection-end-column="76" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding>
+            <element signature="e#7#48#0#PHP" expanded="true" />
+            <element signature="e#643#693#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
