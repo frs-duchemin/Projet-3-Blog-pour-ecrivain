@@ -40,9 +40,7 @@ class ArticleType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 2,
-                        'max' => 1000,
                         'minMessage' => 'Saisir au moins 2 caractères',
-                        'maxMessage' => 'Saisir moins de 1000 caractères'
                     ]),
                     new NotBlank([
                         'message' => 'Veuillez compléter ce champ.'
