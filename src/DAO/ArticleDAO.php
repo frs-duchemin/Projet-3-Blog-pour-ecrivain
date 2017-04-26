@@ -63,7 +63,6 @@ class ArticleDAO extends DAO
         $article->setContent($row['art_content']);
         $article->setDate($row['art_date']);
 
-
         return $article;
     }
 }

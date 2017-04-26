@@ -124,7 +124,6 @@ class CommentDAO extends DAO
         $commentData = array(
             'com_content' => $comment->getContent(),
             'com_author' => $comment->getAuthor(),
-
             'art_id' => $comment->getArticle()->getId(),
             'parent_id' => $parent,
             'signale' => $comment->getSignal(),
